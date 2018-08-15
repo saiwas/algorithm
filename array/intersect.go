@@ -45,19 +45,27 @@ func main() {
 	result = intersect(nums1, nums2)
 	// [1,1]
 	fmt.Println(result)
+
+	// 4
+	nums1 = []int{1, 2, 2, 1}
+	nums2 = []int{2}
+	result = intersect(nums1, nums2)
+	// [2]
+	fmt.Println(result)
 }
 
 func intersect(nums1 []int, nums2 []int) []int {
-	counter := make(map[int]bool)
+	counter := make(map[int]int)
 	res := []int{}
 
-	for _, value2 := range nums2 {
-		counter[value2] = true
+	for _, value := range nums1 {
+		counter[value]++
 	}
 
-	for _, value1 := range nums1 {
-		if counter[value1] {
-			res = append(res, value1)
+	for _, value := range nums2 {
+		if counter[value] > 0 {
+			res = append(res, value)
+			counter[value]--
 		}
 	}
 
